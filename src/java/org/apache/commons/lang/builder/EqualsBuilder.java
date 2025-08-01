@@ -19,6 +19,7 @@ package org.apache.commons.lang.builder;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -377,8 +378,8 @@ public class EqualsBuilder {
         }
         Class lhsClass = lhs.getClass();
         if (!lhsClass.isArray()) {
-            if (lhs instanceof java.math.BigDecimal) {
-                isEquals = (((java.math.BigDecimal)lhs).compareTo(rhs) == 0);
+            if (lhs instanceof java.math.BigDecimal && rhs instanceof java.math.BigDecimal) {
+                isEquals = (((java.math.BigDecimal)lhs).compareTo((java.math.BigDecimal) rhs) == 0);
             } else {
                 // The simple case, not an array, just test the element
                 isEquals = lhs.equals(rhs);

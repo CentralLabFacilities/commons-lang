@@ -14,38 +14,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.lang.enum;
+package org.apache.commons.lang.enumclass;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Color enumeration which demonstrates how to provide a view of the constants
- * in a different class to the Enum. This technique is the safest, however it
- * is obviously inconvenient as it involves defining two sets of constants.
- * See NestedLinked for an alternative.
+ * Color enumeration which demonstrates how to define the constants in a
+ * different class to the Enum. The extra <code>static{}</code> block is
+ * needed to ensure that the enum constants are created before the
+ * static methods on the ColorEnum are used.
+ * <p>
+ * The class loader sees the two classes here as independent - the enum
+ * class is nested, not an inner class. The static block thus forces the
+ * class load of the outer class, which is needed to initialise the enums.
  *
  * @author Stephen Colebourne
  * @version $Id$
  */
 
-public final class NestReferenced {
+public final class NestLinked {
     
-    public static final ColorEnum RED = ColorEnum.RED;
-    public static final ColorEnum GREEN = ColorEnum.GREEN;
-    public static final ColorEnum BLUE = ColorEnum.BLUE;
+    public static final ColorEnum RED = new ColorEnum("Red");
+    public static final ColorEnum GREEN = new ColorEnum("Green");
+    public static final ColorEnum BLUE = new ColorEnum("Blue");
     
-    public NestReferenced() {
+    public NestLinked() {
         super();
     }
     
-    public static final class ColorEnum extends Enum {
+    public static final class ColorEnum extends EnumClass {
 
-        // must be defined here, not just in outer class
-        private static final ColorEnum RED = new ColorEnum("Red");
-        private static final ColorEnum GREEN = new ColorEnum("Green");
-        private static final ColorEnum BLUE = new ColorEnum("Blue");
+        static {
+            // Explicitly reference the class where the enums are defined
+            Object obj = NestLinked.RED;
+        }
         
         private ColorEnum(String color) {
             super(color);

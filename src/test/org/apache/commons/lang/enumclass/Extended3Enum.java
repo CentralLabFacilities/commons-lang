@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.commons.lang.enum;
+package org.apache.commons.lang.enumclass;
 
 import java.util.Iterator;
 import java.util.List;
@@ -36,19 +36,19 @@ public class Extended3Enum extends Extended2Enum {
     }
 
     public static Extended1Enum getEnum(String name) {
-        return (Extended1Enum) Enum.getEnum(Extended3Enum.class, name);
+        return (Extended1Enum) EnumClass.getEnum(Extended3Enum.class, name);
     }
 
     public static Map getEnumMap() {
-        return Enum.getEnumMap(Extended3Enum.class);
+        return EnumClass.getEnumMap(Extended3Enum.class);
     }
 
     public static List getEnumList() {
-        return Enum.getEnumList(Extended3Enum.class);
+        return EnumClass.getEnumList(Extended3Enum.class);
     }
 
     public static Iterator iterator() {
-        return Enum.iterator(Extended3Enum.class);
+        return EnumClass.iterator(Extended3Enum.class);
     }
 
 }

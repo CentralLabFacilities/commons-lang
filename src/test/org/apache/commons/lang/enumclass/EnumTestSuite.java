@@ -14,40 +14,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.lang.enum;
+package org.apache.commons.lang.enumclass;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+import junit.textui.TestRunner;
 
 /**
- * Broken color enumeration.
+ * Test suite for the Enum package.
  *
  * @author <a href="mailto:scolebourne@joda.org">Stephen Colebourne</a>
  * @version $Id$
  */
-public final class Broken1Enum extends Enum {
-    public static final Broken1Enum RED = new Broken1Enum("Red");
-    public static final Broken1Enum GREEN = new Broken1Enum("Green");
-    public static final Broken1Enum GREENISH = new Broken1Enum("Green");  // duplicate not allowed
-
-    private Broken1Enum(String color) {
-        super(color);
+public class EnumTestSuite extends TestCase {
+    
+    /**
+     * Construct a new instance.
+     */
+    public EnumTestSuite(String name) {
+        super(name);
     }
 
-    public static Broken1Enum getEnum(String color) {
-        return (Broken1Enum) getEnum(Broken1Enum.class, color);
+    /**
+     * Command-line interface.
+     */
+    public static void main(String[] args) {
+        TestRunner.run(suite());
     }
 
-    public static Map getEnumMap() {
-        return getEnumMap(Broken1Enum.class);
-    }
-
-    public static List getEnumList() {
-        return getEnumList(Broken1Enum.class);
-    }
-
-    public static Iterator iterator() {
-        return iterator(Broken1Enum.class);
+    /**
+     * Get the suite of tests
+     */
+    public static Test suite() {
+        TestSuite suite = new TestSuite();
+        suite.setName("Commons-Lang-Enum Tests");
+        suite.addTest(EnumTest.suite());
+        suite.addTest(EnumUtilsTest.suite());
+        suite.addTest(ValuedEnumTest.suite());
+        return suite;
     }
 }

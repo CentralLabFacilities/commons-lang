@@ -14,45 +14,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.commons.lang.enum;
+package org.apache.commons.lang.enumclass;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Color enumeration.
+ * Broken color enumeration.
  *
  * @author <a href="mailto:scolebourne@joda.org">Stephen Colebourne</a>
  * @version $Id$
  */
+public final class Broken1Enum extends EnumClass {
+    public static final Broken1Enum RED = new Broken1Enum("Red");
+    public static final Broken1Enum GREEN = new Broken1Enum("Green");
+    public static final Broken1Enum GREENISH = new Broken1Enum("Green");  // duplicate not allowed
 
-public final class ValuedColorEnum extends ValuedEnum {
-    public static final ValuedColorEnum RED = new ValuedColorEnum("Red", 1);
-    public static final ValuedColorEnum GREEN = new ValuedColorEnum("Green", 2);
-    public static final ValuedColorEnum BLUE = new ValuedColorEnum("Blue", 3);
-
-    private ValuedColorEnum(String color, int value) {
-        super(color, value);
+    private Broken1Enum(String color) {
+        super(color);
     }
 
-    public static ValuedColorEnum getEnum(String color) {
-        return (ValuedColorEnum) getEnum(ValuedColorEnum.class, color);
-    }
-
-    public static ValuedColorEnum getEnum(int value) {
-        return (ValuedColorEnum) getEnum(ValuedColorEnum.class, value);
+    public static Broken1Enum getEnum(String color) {
+        return (Broken1Enum) getEnum(Broken1Enum.class, color);
     }
 
     public static Map getEnumMap() {
-        return getEnumMap(ValuedColorEnum.class);
+        return getEnumMap(Broken1Enum.class);
     }
 
     public static List getEnumList() {
-        return getEnumList(ValuedColorEnum.class);
+        return getEnumList(Broken1Enum.class);
     }
 
     public static Iterator iterator() {
-        return iterator(ValuedColorEnum.class);
+        return iterator(Broken1Enum.class);
     }
 }
